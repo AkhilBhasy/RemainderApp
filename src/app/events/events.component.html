@@ -1,0 +1,17 @@
+<h1>List of Events</h1>
+
+<table >
+    <thead>
+        <tr>
+            <th>Date</th>&nbsp;
+            <th>Event</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of events">
+          <td>{{e.Date}}</td>&nbsp;&nbsp;
+          <td>{{e.Event}}</td>
+      </tr>
+    </tbody>
+</table>
+<a href="" routerLink="/dashboard">Home</a>

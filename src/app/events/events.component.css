@@ -1,0 +1,15 @@
+h1{
+    text-align: center;
+    color: red;
+    margin: 50px;
+}
+
+table{
+    margin-left: 400px;
+    color: green;
+    border-width: 2px;
+    border-style: double;
+}
+th{
+    color:red
+}

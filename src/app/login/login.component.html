@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+<h3>Login Here</h3>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <input type="text" id="uid" name="uid" formControlName="uid" placeholder="User ID"  ><br>
+    <div *ngIf="(this.loginForm.get('uid')?.touched|| this.loginForm.get('uid')?.dirty)&& this.loginForm.get('uid')?.errors" class="errors">Invalid User ID</div>
+    <input type="password" id="pswd" name="pswd" formControlName="pswd" placeholder="Password" ><br>
+    <div *ngIf="(this.loginForm.get('pswd')?.touched|| this.loginForm.get('pswd')?.dirty)&& this.loginForm.get('pswd')?.errors" class="errors">Invalid Password</div>
+    <input type="submit" value="Log In">
+    <a href="" routerLink="register">SignUp</a>
+</form>
+

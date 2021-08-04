@@ -1,0 +1,14 @@
+<h1>{{title}}</h1>
+<h5>Welcome {{user}}</h5><br>
+
+<h3>Add Remainder</h3>
+<form [formGroup]="addRemForm" (ngSubmit)="addRem()">
+<input type="text" id="date" name="date" placeholder="Date" formControlName="date"><br>
+<div *ngIf="(this.addRemForm.get('date')?.touched|| this.addRemForm.get('date')?.dirty)&& this.addRemForm.get('date')?.errors" class="errors">Invalid Date</div>
+<input type="text" id="event" name="event" placeholder="Event Name" formControlName="event"><br>
+<div *ngIf="(this.addRemForm.get('event')?.touched|| this.addRemForm.get('event')?.dirty)&& this.addRemForm.get('event')?.errors" class="errors">Invalid event</div>
+
+<input type="submit" value="ADD">
+<br><br><br>
+<a href="" routerLink="/events">View All Remainder</a>
+</form>
