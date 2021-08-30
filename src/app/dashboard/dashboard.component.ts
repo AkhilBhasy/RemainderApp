@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -19,8 +20,13 @@ addRemForm = this.fb.group(
   }
 )
 
-user=this.ds.currentUser
-  constructor(private ds: DataService, private fb: FormBuilder) { }
+userName:any
+uid:any
+
+  constructor(private ds: DataService, private fb: FormBuilder,private router:Router) { 
+    this.userName=localStorage.getItem("userName")
+    this.uid=localStorage.getItem("currentAcc")
+  }
 
   ngOnInit(): void {
   }
@@ -28,14 +34,22 @@ user=this.ds.currentUser
 
   addRem(){
     if (this.addRemForm.valid) {
-      var uid = this.ds.currentAcc
+      var uid = this.uid
+     
       var event = this.addRemForm.value.event
       var date = this.addRemForm.value.date
      
-      var result = this.ds.addRem(uid,event,date)
-      if (result) {
-        alert("Event Added ")
+      this.ds.addRem(uid,event,date)
+      .subscribe((result:any)=>{
+        if(result){
+          alert(result.message)
+        }
+      },
+      (result)=> {
+        alert(result.error.message)
+        
       }
+      )
     }
     else {
       alert("Invalid form")

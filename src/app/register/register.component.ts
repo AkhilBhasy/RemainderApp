@@ -32,20 +32,22 @@ export class RegisterComponent implements OnInit {
       var uid = this.registerForm.value.uid
       var pswd = this.registerForm.value.pswd
 
-      var result = this.ds.register(uid, uname, pswd)
-      if (result) {
-        alert("Registration Sucessfull")
-        this.router.navigateByUrl("")
-      }
-      else {
-        alert("User already exits.....! please log in")
-        this.router.navigateByUrl("")
-      }
-    }
+       this.ds.register(uid, uname, pswd)
+       .subscribe((result: any) => {
+        if (result) {
+          alert(result.message)
+          this.router.navigateByUrl("")
+        }
+      },
+        (result) => {
+          alert(result.error.message)
 
-    else {
-      alert("Invalid form")
-    }
+          this.router.navigateByUrl("")
+        }
+      )
+}
+  else {
+alert("Invalid form")
+}
   }
-
 }

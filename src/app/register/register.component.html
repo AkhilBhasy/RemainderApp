@@ -1,3 +1,4 @@
+<div class="m1 container">
 <h1>{{title}}</h1>
 <h3>Register Here</h3>
 <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -8,3 +9,4 @@
 <input type="password" id="pswd" name="pswd" formControlName="pswd" placeholder="Password" ><br>
 <div *ngIf="(this.registerForm.get('pswd')?.touched|| this.registerForm.get('pswd')?.dirty)&& this.registerForm.get('pswd')?.errors" class="errors">Invalid Password</div>
 <input type="submit" value="Register"></form>
+</div>

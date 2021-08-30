@@ -8,14 +8,26 @@ import { DataService } from '../services/data.service';
 })
 export class EventsComponent implements OnInit {
 
-  events=[]
-
+  events:any
+uid:any
 
   constructor(public ds:DataService) { 
-    this.events=this.ds.getEvents()
-    console.log(this.events);
+    this.uid=localStorage.getItem("currentAcc")
+    this.ds.getEvents(this.uid)
+    .subscribe((result:any)=>{
+      if(result){
+        this.events=result.events
+      }
+    },
+    (result)=>{
+      alert(result.error.message)
+    }
+      )
+    
+    console.log(this.events)
     
   }
+
 
   ngOnInit(): void {
   }

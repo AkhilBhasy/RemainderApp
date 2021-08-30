@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+const options={
+  withCredentials:true
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,102 +23,48 @@ export class DataService {
   }
 
 
-  constructor() { 
-    this.getDetails()
+  constructor(private http:HttpClient) { 
+    
   }
 
 
-  saveDetails() {
-    if (this.users) {
-      localStorage.setItem("users", JSON.stringify(this.users))
-    }
-    if (this.currentUser) {
-      localStorage.setItem("currentUser", JSON.stringify(this.currentUser))
-    }
-    if (this.currentAcc) {
-      localStorage.setItem("currentAcc", JSON.stringify(this.currentAcc))
-    }
-  }
+  
 
 
-  getDetails() {
-    if (localStorage.getItem("users")) {
-      this.users = JSON.parse(localStorage.getItem("users") || '')
+  getEvents(uid:any){
+   
+    const data={
+      uid
     }
-    if (localStorage.getItem("currentUser")) {
-      this.currentUser = JSON.parse(localStorage.getItem("currentUser") || '')
-    }
-    if (localStorage.getItem("currentAcc")) {
-      this.currentAcc = JSON.parse(localStorage.getItem("currentAcc") || '')
-    }
-  }
-
-
-  getEvents(){
-    return this.users[this.currentAcc].events
+    return this.http.post("http://localhost:3030/getRems",data,options)
+   
   }
 
 
   login(uid: any, pswd: any) {
-    let acc_details = this.users
-    if (uid in acc_details) {
-      if (pswd == acc_details[uid]["password"]) {
-        this.currentUser = acc_details[uid]["uname"]
-        this.currentAcc=uid
-         this.saveDetails()
-        return true
-      }
-      else {
-        alert("Incorrect Password")
-        return false
-      }
+    const data={
+      uid,
+      pswd
     }
-    else {
-      alert("Invalid User")
-      return false
-    }
+    return this.http.post("http://localhost:3030/login",data,options)
   }
   register(uid: any, uname: any, password: any) {
-    let accDetails = this.users
-    if (uid in accDetails) {
-      return false
+    const data={
+      uid,
+      uname,
+      password
     }
-    else {
-      accDetails[uid] = {
-        uid,
-        uname,
-        password,
-      }
-      this.saveDetails()
-      console.log(this.users);
-      return true
-
-
-    }
+    return this.http.post("http://localhost:3030/register",data)
   }
  
 
   addRem(uid:any,event: any, date: any) {
-    
-    let acc_details = this.users
-   
-    if (uid in acc_details) {
-      
-        acc_details[uid].events.push({
-          Event:event,
-          Date:date
-        })
-       console.log(acc_details[uid].events);
-       
-        this.saveDetails()
-        return true
-      }
-      
-    
-    else {
-      alert("Invalid User")
-      return false
+    const data={
+      uid,
+      event,
+      date
     }
+    return this.http.post("http://localhost:3030/addRem",data,options)
 
   }
 

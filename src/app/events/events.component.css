@@ -1,15 +1,23 @@
 h1{
     text-align: center;
-    color: red;
+    color: brown;
     margin: 50px;
 }
 
 table{
     margin-left: 400px;
-    color: green;
+    color: black;
     border-width: 2px;
     border-style: double;
 }
 th{
-    color:red
+    color:rgb(97, 7, 7)
+}
+
+
+.container{
+    background-image: url(/assets/event3.jpg);
+    background-size: cover;
+   height: 800px;
+
 }
